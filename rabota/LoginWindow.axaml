@@ -1,0 +1,64 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="rabota.LoginWindow"
+        Title="Авторизация"
+        Width="500"
+        Height="350"
+        CanResize="False"
+        WindowStartupLocation="CenterScreen">
+    
+    <Grid RowDefinitions="Auto,Auto,Auto,Auto,Auto"
+          ColumnDefinitions="*,*"
+          Margin="20">
+        
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" 
+                   Text="Вход в систему"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Foreground="#2C3E50"
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+        
+        <TextBlock Grid.Row="1" Grid.Column="0" 
+                   Text="Логин:" 
+                   VerticalAlignment="Center"/>
+        <TextBox Grid.Row="1" Grid.Column="1" 
+                 x:Name="UsernameBox"
+                 Margin="5"
+                 Width="200"
+                 HorizontalAlignment="Left"/>
+        
+        <TextBlock Grid.Row="2" Grid.Column="0" 
+                   Text="Пароль:" 
+                   VerticalAlignment="Center"/>
+        <TextBox Grid.Row="2" Grid.Column="1" 
+                 x:Name="PasswordBox"
+                 Margin="5"
+                 Width="200"
+                 HorizontalAlignment="Left"
+                 PasswordChar="*"/>
+        
+        <TextBlock Grid.Row="3" Grid.ColumnSpan="2"
+                   x:Name="ErrorText"
+                   Foreground="Red"
+                   TextWrapping="Wrap"
+                   Margin="0,10,0,0"
+                   HorizontalAlignment="Center"/>
+        
+        <StackPanel Grid.Row="4" Grid.ColumnSpan="2"
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center"
+                    Margin="0,20,0,0"
+                    Spacing="20">
+            <Button x:Name="LoginButton" 
+                    Content="Войти" 
+                    Width="100"
+                    Background="#0078D7"
+                    Foreground="White"/>
+            <Button x:Name="RegisterButton" 
+                    Content="Регистрация" 
+                    Width="100"/>
+        </StackPanel>
+        
+    </Grid>
+</Window>

@@ -1,0 +1,87 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:models="clr-namespace:rabota.Models"
+        x:Class="rabota.SeatSelectionWindow"
+        Title="Выбор места"
+        Width="800"
+        Height="600"
+        WindowStartupLocation="CenterOwner">
+    
+    <Window.Styles>
+        <Style Selector="Button.seat">
+            <Setter Property="Width" Value="40"/>
+            <Setter Property="Height" Value="40"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="Background" Value="#2A2A2A"/>
+            <Setter Property="Foreground" Value="#D4AF37"/>
+            <Setter Property="BorderBrush" Value="#8B0000"/>
+            <Setter Property="BorderThickness" Value="1"/>
+        </Style>
+        <Style Selector="Button.seat:pointerover">
+            <Setter Property="Background" Value="#8B0000"/>
+        </Style>
+        <Style Selector="Button.seat.occupied">
+            <Setter Property="Background" Value="#555555"/>
+            <Setter Property="Foreground" Value="#999999"/>
+            <Setter Property="IsEnabled" Value="False"/>
+        </Style>
+        <Style Selector="Button.seat.selected">
+            <Setter Property="Background" Value="#D4AF37"/>
+            <Setter Property="Foreground" Value="#1A1A1A"/>
+        </Style>
+    </Window.Styles>
+
+    <DockPanel>
+        <Border DockPanel.Dock="Top" Background="#1A1A1A" Padding="10">
+            <StackPanel>
+                <TextBlock x:Name="FilmTitleText" FontSize="20" Foreground="#D4AF37" FontWeight="Bold"/>
+                <TextBlock x:Name="SessionTimeText" Foreground="#CCCCCC"/>
+                <TextBlock x:Name="HallNameText" Foreground="#CCCCCC"/>
+            </StackPanel>
+        </Border>
+
+        <Border DockPanel.Dock="Top" Background="#2A2A2A" Padding="10" Margin="0,5">
+            <StackPanel Spacing="10">
+                <TextBlock Text="Зритель" Foreground="#D4AF37" FontWeight="Bold"/>
+                <TextBox x:Name="SearchViewerBox" Watermark="Поиск по ФИО или телефону"/>
+                <Button x:Name="SearchViewerBtn" Content="Найти" Background="#8B0000"/>
+                <ListBox x:Name="ViewerListBox" Height="100">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate DataType="models:Viewer">
+                            <TextBlock Text="{Binding FullName}"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+                <StackPanel Orientation="Horizontal" Spacing="10">
+                    <TextBox x:Name="NewViewerNameBox" Watermark="ФИО нового зрителя" Width="200"/>
+                    <TextBox x:Name="NewViewerPhoneBox" Watermark="Телефон" Width="150"/>
+                    <Button x:Name="CreateViewerBtn" Content="Создать зрителя" Background="#8B0000"/>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+
+        <ScrollViewer>
+            <ItemsControl x:Name="SeatsGrid" HorizontalAlignment="Center" Margin="10">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="models:SeatModel">
+                        <Button Classes="seat" Tag="{Binding}" Content="{Binding SeatNumber}" Click="OnSeatClick"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
+
+        <Border DockPanel.Dock="Bottom" Background="#1A1A1A" Padding="10">
+            <StackPanel Orientation="Horizontal" Spacing="20" HorizontalAlignment="Center">
+                <TextBlock x:Name="SelectedInfo" Foreground="#D4AF37"/>
+                <TextBlock x:Name="PriceInfo" Foreground="#FFD700"/>
+                <Button x:Name="ConfirmButton" Content="Продать билет" Background="#8B0000" IsEnabled="False"/>
+                <Button x:Name="CancelButton" Content="Отмена" Background="#555555"/>
+            </StackPanel>
+        </Border>
+    </DockPanel>
+</Window>
